@@ -1,0 +1,16 @@
+*
+{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.Navbar
+{
+    background-color: white;
+    padding:1rem;
+    box-shadow: 5px 5px 10px black;
+}
+.Navbar h1
+{
+    font-family: 'Libre Baskerville', serif;
+}
