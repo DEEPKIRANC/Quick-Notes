@@ -9,8 +9,38 @@
     background-color: white;
     padding:1rem;
     box-shadow: 5px 5px 10px black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 .Navbar h1
 {
+    flex:1;
     font-family: 'Libre Baskerville', serif;
+  
+}
+.Navbar__links
+{
+    
+    display: flex;
+    justify-content: space-between;
+}
+.Navbar__links a
+{
+    font-family: 'Montserrat','sans serif';
+    text-decoration: none;
+    color:black;
+    margin-left:1rem;
+    transition: border-bottom 0.3s ease-in;
+    border-bottom: 2px solid white;
+}
+.Navbar__links a:hover
+{
+    font-weight:bold;
+    border-bottom: 2px solid black;
+}
+.Navbar__links a:active{
+    font-weight: bold;
+    border: 2px solid black;
 }

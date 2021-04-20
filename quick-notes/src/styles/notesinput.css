@@ -1,0 +1,42 @@
+*
+{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.inputsection
+{
+    margin-top:2rem;
+    display: flex;
+    justify-content: space-around;
+    height: 50vh;
+    padding: 1rem;
+    flex-wrap:wrap;
+    row-gap: 2rem;
+    
+}
+.overview
+{
+    border-bottom-right-radius:70px;
+    box-shadow: 2px 2px 2px #333;
+    padding:1.5rem;
+    background-color: whitesmoke;
+    height:inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:flex-start;
+    row-gap: 2rem;
+}
+.overview h3
+{
+    font-family: 'Libre Baskerville', serif;
+}
+.noteinput
+{
+    height: inherit;
+    background-color: lightcoral;
+    padding: 2rem;
+    
+}
