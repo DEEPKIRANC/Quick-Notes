@@ -1,3 +1,7 @@
+:root
+{
+    --primaryColor:#fefae0;
+}
 *
 {
     margin:0;
@@ -10,10 +14,11 @@
     margin-top:2rem;
     display: flex;
     justify-content: space-around;
-    height: 50vh;
-    padding: 1rem;
+    
+    padding:2rem;
+    align-items: center;
     flex-wrap:wrap;
-    row-gap: 2rem;
+    row-gap: 1rem;
     
 }
 .overview
@@ -21,22 +26,67 @@
     border-bottom-right-radius:70px;
     box-shadow: 2px 2px 2px #333;
     padding:1.5rem;
+    max-width: 500px;
     background-color: whitesmoke;
     height:inherit;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content:flex-start;
-    row-gap: 2rem;
+    row-gap: 0.75rem;
 }
-.overview h3
+.overview,.noteinput h3
 {
     font-family: 'Libre Baskerville', serif;
+    text-align: center;
+}
+.overview span
+{
+    font-size: 0.85em;
 }
 .noteinput
 {
-    height: inherit;
-    background-color: lightcoral;
-    padding: 2rem;
     
+    background-color: #fefae0;
+    padding: 2rem 4rem;
+    border-radius: 10px;
+    
+}
+.inputbox
+{
+    margin-top:2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    row-gap: 2rem;
+}
+
+.inputbox :nth-child(1)
+{
+    outline: none;
+    
+    font-size: 1.5rem;
+    border:none;
+    background-color: var(--primaryColor);
+    border-bottom: 2px solid black;
+}
+.inputbox :nth-child(2)
+{
+    outline: none;
+    
+    font-size: 1rem;
+    border:none;
+    background-color: var(--primaryColor);
+    border-bottom: 2px solid black;
+
+}
+.inputbox button
+{
+    padding:0.5rem 1.5rem;
+    background-color: olivedrab;
+    color: white;
+    font-weight: bold;
+    border:none;
+    cursor:pointer;
 }
