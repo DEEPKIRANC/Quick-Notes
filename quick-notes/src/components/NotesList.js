@@ -1,6 +1,22 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import "../styles/noteslist.css";
+import {db} from "../firebase";
+import {Link} from "react-router-dom";
 function NotesList() {
+
+
+    const [notes,setNotes]=useState([]);
+
+    useEffect(()=>{
+        db.collection("notes").onSnapshot(snapshot=>{
+            const notesdb=snapshot.docs.map(doc=>{return {...doc.data(),id:doc.id}})
+            console.log(notesdb);
+            setNotes(notesdb);
+            
+                
+        })
+        
+    },[])
     return (
         <div>
             <h2 style={{textAlign:"center",backgroundColor:"whitesmoke",fontFamily:"Libre Baskerville",paddingTop:"1rem"}}>Sample Notes</h2>
@@ -10,7 +26,7 @@ function NotesList() {
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div className="links">
-                        <span><a href="/">Go To Editor</a></span>
+                        <span><Link to="/editor">Go To Editor</Link></span>
                         <button>Delete this note</button>
                     </div>
                     <br/>
@@ -21,7 +37,7 @@ function NotesList() {
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div className="links">
-                        <span><a href="/">Go To Editor</a></span>
+                        <span><Link to="/editor">Go To Editor</Link></span>
                         <button>Delete this note</button>
                     </div>
                     <br/>
@@ -32,7 +48,7 @@ function NotesList() {
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div className="links">
-                        <span><a href="/">Go To Editor</a></span>
+                        <span><Link to="/editor">Go To Editor</Link></span>
                         <button>Delete this note</button>
                     </div>
                     <br/>
