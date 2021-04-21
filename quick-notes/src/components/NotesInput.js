@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import "../styles/notesinput.css";
 import DoneAllIcon from '@material-ui/icons/DoneAll';
+import "animate.css";
 
 
 function NotesInput() {
@@ -8,7 +9,7 @@ function NotesInput() {
     const [note,setNote]=useState("");
     return (
         <div className="inputsection">
-            <div className="overview">
+            <div className="overview animate__animated animate__fadeIn">
                 <h3>Welcome To QuickNotes</h3>
                 <span><DoneAllIcon/>Add and Save Notes</span>
                 <span><DoneAllIcon />Use Our Interactive Editor to make changes in realtime</span>
@@ -17,7 +18,7 @@ function NotesInput() {
                 <span><DoneAllIcon />Pick a background color for your Note</span>
                 <span><DoneAllIcon />Delete a Note</span>   
             </div>
-            <div className="noteinput">
+            <div className="noteinput animate__animated animate__fadeIn">
                 <h3>Create New Note</h3>
                 <form>
                     <div className="inputbox">

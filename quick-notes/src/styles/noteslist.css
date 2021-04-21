@@ -1,0 +1,71 @@
+body
+{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.notes
+{
+    
+    background-color: whitesmoke;
+    width:100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap:wrap;
+    padding:1rem;
+}
+
+.notes__notecard
+{
+    margin-top: 1rem;
+    display:flex;
+    flex-direction: column;
+    background-color: #fefae0;
+    height:100%;
+    border-radius: 20px;
+    max-width:20rem;
+    padding:1rem;
+}
+.notes__notecard p
+{
+    text-align: justify;
+}
+.links
+{
+    display:flex;
+    width:100%;
+    justify-content: space-evenly;
+}
+
+.links>span
+{
+    padding:0.25rem;
+    
+    background-color:olivedrab;
+    color:black;
+    border-radius: 5px;
+}
+.links a
+{
+    text-decoration: none;
+    color:white;
+    font-weight: bold;
+    font-size: 0.75rem;
+}
+
+.links button
+{
+    background: #fefae0;
+    color:black;
+    border:2px solid black;
+    padding:0.2rem;
+    font-weight: bold;
+    cursor:pointer;
+    outline: none;
+}
+.notes__notecard > *:not(:last-child)
+{
+    margin-bottom: 1rem;
+}
