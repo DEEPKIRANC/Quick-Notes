@@ -4,6 +4,7 @@ import NotesInput from './components/NotesInput';
 import NotesList from './components/NotesList';
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import NoteEditor from './components/NoteEditor';
+import Signin from './components/Signin';
 function App() {
   return (
   <Router>
@@ -14,6 +15,10 @@ function App() {
           <NotesInput />
           <NotesList />
         </Route>
+        <Route path="/login">
+          <Signin />
+        </Route>
+      
         <Route path="/editor">
           <NoteEditor />
         </Route>

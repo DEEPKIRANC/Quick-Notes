@@ -1,0 +1,30 @@
+.notesection
+{
+    width:100%;
+    padding-top: 3rem;
+}
+.selectednote
+{
+    max-width: 600px;
+    margin:0 auto;
+    background-color: lemonchiffon;
+    padding:1rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items: flex-start;
+}
+.selectednote > *:not(:last-child)
+{
+    margin-bottom: 1.5rem;
+}
+
+.back
+{
+    padding:0.5rem;
+    background-color: lightblue;
+    font-weight: bold;
+    border:none;
+    outline: none;
+    cursor:pointer;
+}

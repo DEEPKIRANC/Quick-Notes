@@ -1,10 +1,12 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import "../styles/noteslist.css";
 import {db} from "../firebase";
 import {Link} from "react-router-dom";
+import {UserContext} from "../hooks/UserProvider";
+
 function NotesList() {
 
-
+    const [user,setUser]=useContext(UserContext);
     const [notes,setNotes]=useState([]);
 
     useEffect(()=>{
@@ -17,6 +19,8 @@ function NotesList() {
         })
         
     },[])
+    if(!user || notes.length===0)
+    {
     return (
         <div>
             <h2 style={{textAlign:"center",backgroundColor:"whitesmoke",fontFamily:"Libre Baskerville",paddingTop:"1rem"}}>Sample Notes</h2>
@@ -58,6 +62,27 @@ function NotesList() {
             </div>
         </div>
     )
+    }
+    else
+    {
+        return ( <div>
+            <h2 style={{textAlign:"center",backgroundColor:"whitesmoke",fontFamily:"Libre Baskerville",paddingTop:"1rem"}}>Sample Notes</h2>
+            <div className="notes">
+                {notes.map(note=>
+                <div key={note.id} className="notes__notecard">
+                    <h2>{note.title}</h2>
+                    <p>{note.content}</p>
+                    <div className="links">
+                        <span><Link to="/editor">Go To Editor</Link></span>
+                        <button>Delete this note</button>
+                    </div>
+                    <br/>
+                    <span><strong>Last Updated at</strong>: {note.updatedAt.toDate().toString()} </span>
+                </div>
+                )}    
+            </div>
+        </div>)
+    }
 }
 
 export default NotesList
