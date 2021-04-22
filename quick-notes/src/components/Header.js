@@ -16,7 +16,7 @@ function Header() {
             <div className="Navbar__links">
                 <Link to="/">Home</Link>
                 <a href="/">Starred</a>
-                {user?<Link to="/login">My Space</Link>:
+                {user?<Link to="/login">Log Out</Link>:
                 <Link to="/login">Sign In</Link>
                 }
             </div>

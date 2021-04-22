@@ -10,15 +10,43 @@ function NotesList() {
     const [notes,setNotes]=useState([]);
 
     useEffect(()=>{
-        db.collection("notes").onSnapshot(snapshot=>{
+        var userObj=localStorage.getItem("user");
+        if(userObj)
+        {
+            setUser(JSON.parse(userObj));
+            console.log("This is working!");
+        }
+        else
+        {
+            console.log("User Not set!");
+        }
+    },[])
+
+    useEffect(()=>{
+        
+        if(user)
+        {
+        localStorage.setItem("user",JSON.stringify(user));
+        console.log(user.uid);
+        }
+       
+        
+    },[user])
+    useEffect(()=>{
+       
+        if(user)
+        {
+       
+        db.collection("notes").where("userID","==",user.uid).orderBy("updatedAt","desc").onSnapshot(snapshot=>{
             const notesdb=snapshot.docs.map(doc=>{return {...doc.data(),id:doc.id}})
             console.log(notesdb);
             setNotes(notesdb);
             
                 
         })
-        
-    },[])
+    }
+    
+},[user])
     if(!user || notes.length===0)
     {
     return (
@@ -77,7 +105,7 @@ function NotesList() {
                         <button>Delete this note</button>
                     </div>
                     <br/>
-                    <span><strong>Last Updated at</strong>: {note.updatedAt.toDate().toString()} </span>
+                    <span><strong>Last Updated at</strong>: {note.updatedAt && note.updatedAt.toDate().toString()} </span>
                 </div>
                 )}    
             </div>
