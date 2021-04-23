@@ -52,8 +52,8 @@ function NotesInput() {
                 <h3>Welcome To QuickNotes</h3>
                 <span>Add and Save Notes</span>
                 <span>Use Our Interactive Editor to make changes in realtime</span>
+                <span>Responsive Design , usable across devices of all sizes</span> 
                 <span>Bookmark your Important notes </span> 
-                <span>Arrange your notes based on time of creation / updation</span> 
                 <span>Pick a background color for your Note</span>
                 <span style={{fontStyle:"italic"}}><strong>Sign In to Get Started</strong></span>   
             </div>

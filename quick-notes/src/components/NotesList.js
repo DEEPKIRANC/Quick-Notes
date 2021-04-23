@@ -74,7 +74,8 @@ const deleteNote=(id)=>{
 
 const spanStyle={
     color:"white",
-    cursor:"pointer"
+    cursor:"pointer",
+    fontSize:"0.90rem"
 }
 
 
