@@ -20,11 +20,11 @@ function NotesList() {
         if(userObj)
         {
             setUser(JSON.parse(userObj));
-            console.log("This is working!");
+           // console.log("This is working!");
         }
         else
         {
-            console.log("User Not set!");
+           // console.log("User Not set!");
         }
     },[setUser])
 
@@ -35,14 +35,14 @@ function NotesList() {
       
         db.collection("notes").where("userID","==",user.uid).orderBy("updatedAt","desc").onSnapshot(snapshot=>{
             const notesdb=snapshot.docs.map(doc=>{return {...doc.data(),id:doc.id}})
-            console.log(notesdb);
+          //  console.log(notesdb);
             setNotes(notesdb);
             
         }
        
     )
     localStorage.setItem("user",JSON.stringify(user));
-            console.log(user.uid);
+          //  console.log(user.uid);
     }
 },[user])
 
@@ -57,6 +57,19 @@ const handleClick=(id)=>{
         top:0,
         behavior:'smooth'
     });
+}
+
+
+const deleteNote=(id)=>{
+    var confirm=window.confirm("Do you want to delete this note ..?")
+    if(confirm)
+    {
+        setShowEditor(false);
+        setShowInputSection(true);
+        db.collection("notes").doc(id).delete();
+        
+}
+
 }
 
 const spanStyle={
@@ -81,7 +94,7 @@ const spanStyle={
                         <button>Delete this note</button>
                     </div>
                     <br/>
-                    <span>Last Updated at Time : Sign In to Explore! </span>
+                    <span>Last Updated at Time : <strong>Sign In to Explore!</strong> </span>
                 </div>
                 <div className="notes__notecard">
                     <h2>Sign In to Get Started</h2>
@@ -92,7 +105,7 @@ const spanStyle={
                         <button>Delete this note</button>
                     </div>
                     <br/>
-                    <span>Last Updated at Time : Sign In to Explore!</span>
+                    <span>Last Updated at Time : <strong>Sign In to Explore!</strong></span>
                 </div>    
                 <div className="notes__notecard">
                     <h2>Title 3</h2>
@@ -103,7 +116,7 @@ const spanStyle={
                         <button>Delete this note</button>
                     </div>
                     <br/>
-                    <span>Last Updated at Time : Sign In to Explore!</span>
+                    <span>Last Updated at Time : <strong>Sign In to Explore!</strong></span>
                 </div>    
             
             </div>
@@ -130,7 +143,7 @@ const spanStyle={
                     <div className="links">
                         <span style={spanStyle} onClick={()=>handleClick(note.id)}>
                            Open Editor</span>
-                        <button>Delete this note</button>
+                        <button onClick={()=>deleteNote(note.id)}>Delete this note</button>
                     </div>
                     <br/>
                     <span><strong>Last Updated at</strong>: {note.updatedAt && note.updatedAt.toDate().toString()} </span>

@@ -1,4 +1,4 @@
-import React,{useEffect,useState,useRef,useContext} from 'react'
+import React,{useEffect,useState,useContext} from 'react'
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../styles/noteeditor.css";
