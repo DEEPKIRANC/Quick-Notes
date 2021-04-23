@@ -69,3 +69,7 @@ body
 {
     margin-bottom: 1rem;
 }
+.special
+{
+    animation-duration: 2s;
+}

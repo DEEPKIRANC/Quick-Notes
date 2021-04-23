@@ -55,7 +55,7 @@ function NotesInput() {
                 <span>Bookmark your Important notes </span> 
                 <span>Arrange your notes based on time of creation / updation</span> 
                 <span>Pick a background color for your Note</span>
-                <span>Delete a Note</span>   
+                <span style={{fontStyle:"italic"}}><strong>Sign In to Get Started</strong></span>   
             </div>
             <div className="noteinput animate__animated animate__fadeIn">
                 <h3>Create New Note</h3>

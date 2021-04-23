@@ -60,10 +60,10 @@ useEffect(()=>{
             </ReactQuill>
             <div className="notesection">
                 <div className="selectednote">
-                    <h1>Title: {title}</h1>
+                    <h1>{title}</h1>
                     <p>{removeHTMLTags(text)}</p>
                     
-                    <button className="back" onClick={handleClick}>Back to Notes</button>
+                    <button className="back" onClick={handleClick}>Close Editor</button>
                 </div>
             </div>    
         </div>

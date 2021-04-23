@@ -136,7 +136,12 @@ function Signin() {
     }
     else
     {
-        return <button className="logBtn" onClick={handleLogOut}>Log Out</button>
+        return <div className="logout">
+        <div className="logout__container">
+            <h3 style={{color:"white",textAlign:"center"}}>You are now logged in ! Click on Home to start using QuickNotes :) </h3>
+            <button className="logBtn" onClick={handleLogOut}>Log Out</button>
+        </div>
+        </div>
     }
 }
 

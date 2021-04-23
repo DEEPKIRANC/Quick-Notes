@@ -4,7 +4,7 @@ import {db} from "../firebase";
 import {UserContext} from "../hooks/UserProvider";
 import {removeHTMLTags} from "../helpers";
 import NoteEditor from './NoteEditor';
-import firebase from "firebase";
+import "animate.css";
 
 function NotesList() {
 
@@ -53,9 +53,16 @@ const handleClick=(id)=>{
     setShowInputSection(false);
     const noteObj=notes.filter(note=>note.id===id)[0];
     setSelectedNote(noteObj);
+    window.scroll({
+        top:0,
+        behavior:'smooth'
+    });
 }
 
-
+const spanStyle={
+    color:"white",
+    cursor:"pointer"
+}
 
 
 
@@ -70,33 +77,33 @@ const handleClick=(id)=>{
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div className="links">
-                        <span>Go To Editor</span>
+                        <span style={spanStyle}>Open Editor</span>
                         <button>Delete this note</button>
                     </div>
                     <br/>
-                    <span>Last Updated at Time : </span>
+                    <span>Last Updated at Time : Sign In to Explore! </span>
                 </div>
                 <div className="notes__notecard">
-                    <h2>Title 2</h2>
+                    <h2>Sign In to Get Started</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div className="links">
-                        <span>Go To Editor</span>
+                        <span style={spanStyle}>Open Editor</span>
                         <button>Delete this note</button>
                     </div>
                     <br/>
-                    <span>Last Updated at Time : </span>
+                    <span>Last Updated at Time : Sign In to Explore!</span>
                 </div>    
                 <div className="notes__notecard">
                     <h2>Title 3</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div className="links">
-                        <span>Go To Editor</span>
+                        <span style={spanStyle}>Open Editor</span>
                         <button>Delete this note</button>
                     </div>
                     <br/>
-                    <span>Last Updated at Time : </span>
+                    <span>Last Updated at Time : Sign In to Explore!</span>
                 </div>    
             
             </div>
@@ -117,12 +124,12 @@ const handleClick=(id)=>{
             <h2 style={{textAlign:"center",backgroundColor:"whitesmoke",fontFamily:"Libre Baskerville",paddingTop:"1rem",textDecoration:"underline"}}>My Notes</h2>
             <div className="notes">
                 {notes.map(note=>
-                <div key={note.id} className="notes__notecard">
+                <div key={note.id} className="notes__notecard special animate__animated animate__fadeIn">
                     <h2>{note.title}</h2>
-                    <p>{note.content && removeHTMLTags(note.content.substring(0,30)) + '...'}</p>
+                    <p>{note.content && removeHTMLTags(note.content.substring(0,100)) + '...'}</p>
                     <div className="links">
-                        <span  onClick={()=>handleClick(note.id)}>
-                           Go To Editor</span>
+                        <span style={spanStyle} onClick={()=>handleClick(note.id)}>
+                           Open Editor</span>
                         <button>Delete this note</button>
                     </div>
                     <br/>
