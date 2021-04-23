@@ -1,4 +1,4 @@
-import React,{useState,useRef,useContext} from 'react'
+import React,{useEffect,useState,useRef,useContext} from 'react'
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../styles/noteeditor.css";
@@ -12,7 +12,18 @@ function NoteEditor({noteList,selectedNoteId,setShowEditor}) {
     const selectedNoteIndex=selectedNoteId;
     const noteObj=noteList.filter(note=>note.id===selectedNoteIndex)[0];
     const [text,setText]=useState("");
-    
+    const [title,setTitle]=useState("");
+    const [noteID,setNoteID]=useState("");
+
+    useEffect(()=>{
+
+        setText(noteObj.content);
+        setTitle(noteObj.title);
+        setNoteID(noteObj.id);
+
+    },[noteList])
+
+
     const updateBody=(val)=>{
         setText(val);
         update();      

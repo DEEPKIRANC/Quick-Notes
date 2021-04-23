@@ -3,6 +3,7 @@ import "../styles/noteslist.css";
 import {db} from "../firebase";
 import {UserContext} from "../hooks/UserProvider";
 import Editor from "./NoteEditor";
+import {removeHTMLTags} from "../helpers";
 
 function NotesList() {
 
@@ -104,7 +105,7 @@ const handleClick=(id)=>{
                 {notes.map(note=>
                 <div key={note.id} className="notes__notecard">
                     <h2>{note.title}</h2>
-                    <p>{note.content}</p>
+                    <p>{note.content && removeHTMLTags(note.content.substring(0,30)) + '...'}</p>
                     <div className="links">
                         <span  onClick={()=>handleClick(note.id)}>
                            Go To Editor</span>
