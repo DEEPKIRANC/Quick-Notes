@@ -13,6 +13,9 @@ function Signin() {
     const [passwordError,setPasswordError]=useState("");
     const [hasAccount,setHasAccount]=useState(false);
     
+    useEffect(()=>{
+        console.log("User : ",user);
+    },[user])
    
     const clearInputs=()=>{
         setEmail('');
@@ -74,6 +77,7 @@ function Signin() {
 
    const handleLogOut=()=>{
      firebaseApp.auth().signOut();
+     localStorage.removeItem("user");   
      alert("You have been logged out!");
    }
 

@@ -3,7 +3,6 @@ import Header from "./components/Header";
 import NotesInput from './components/NotesInput';
 import NotesList from './components/NotesList';
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
-import NoteEditor from './components/NoteEditor';
 import Signin from './components/Signin';
 function App() {
   return (
@@ -17,10 +16,6 @@ function App() {
         </Route>
         <Route path="/login">
           <Signin />
-        </Route>
-      
-        <Route path="/editor">
-          <NoteEditor />
         </Route>
       </Switch>
     </div>

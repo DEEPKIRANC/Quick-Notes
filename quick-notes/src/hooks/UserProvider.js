@@ -4,7 +4,8 @@ export const UserContext=createContext("");
 
 export const UserProvider=(props)=>{
     const [user,setUser]=useState("");
-    return <UserContext.Provider value={[user,setUser]}>
+    const [showInputSection,setShowInputSection]=useState(true);
+    return <UserContext.Provider value={[user,setUser,showInputSection,setShowInputSection]}>
         {props.children}
     </UserContext.Provider>    
 }

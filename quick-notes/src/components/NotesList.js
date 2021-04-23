@@ -1,13 +1,16 @@
 import React,{useState,useEffect,useContext} from 'react'
 import "../styles/noteslist.css";
 import {db} from "../firebase";
-import {Link} from "react-router-dom";
 import {UserContext} from "../hooks/UserProvider";
+import Editor from "./NoteEditor";
 
 function NotesList() {
 
-    const [user,setUser]=useContext(UserContext);
+    const [user,setUser,showInputSection,setShowInputSection]=useContext(UserContext);
     const [notes,setNotes]=useState([]);
+
+    const [showEditor,setShowEditor]=useState(false);
+    const [selectedNoteIndex,setSelectedNoteIndex]=useState("");
 
     useEffect(()=>{
         var userObj=localStorage.getItem("user");
@@ -26,27 +29,27 @@ function NotesList() {
         
         if(user)
         {
-        localStorage.setItem("user",JSON.stringify(user));
-        console.log(user.uid);
-        }
-       
-        
-    },[user])
-    useEffect(()=>{
-       
-        if(user)
-        {
-       
+      
         db.collection("notes").where("userID","==",user.uid).orderBy("updatedAt","desc").onSnapshot(snapshot=>{
             const notesdb=snapshot.docs.map(doc=>{return {...doc.data(),id:doc.id}})
             console.log(notesdb);
             setNotes(notesdb);
             
-                
-        })
+        }
+       
+    )
+    localStorage.setItem("user",JSON.stringify(user));
+            console.log(user.uid);
     }
-    
 },[user])
+
+
+const handleClick=(id)=>{
+    setSelectedNoteIndex(id);
+    setShowEditor(true);
+    setShowInputSection(false);
+}
+
     if(!user || notes.length===0)
     {
     return (
@@ -58,7 +61,7 @@ function NotesList() {
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div className="links">
-                        <span><Link to="/editor">Go To Editor</Link></span>
+                        <span>Go To Editor</span>
                         <button>Delete this note</button>
                     </div>
                     <br/>
@@ -69,7 +72,7 @@ function NotesList() {
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div className="links">
-                        <span><Link to="/editor">Go To Editor</Link></span>
+                        <span>Go To Editor</span>
                         <button>Delete this note</button>
                     </div>
                     <br/>
@@ -80,7 +83,7 @@ function NotesList() {
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div className="links">
-                        <span><Link to="/editor">Go To Editor</Link></span>
+                        <span>Go To Editor</span>
                         <button>Delete this note</button>
                     </div>
                     <br/>
@@ -93,6 +96,8 @@ function NotesList() {
     }
     else
     {
+        if(!showEditor)
+        {
         return ( <div>
             <h2 style={{textAlign:"center",backgroundColor:"whitesmoke",fontFamily:"Libre Baskerville",paddingTop:"1rem"}}>Sample Notes</h2>
             <div className="notes">
@@ -101,7 +106,8 @@ function NotesList() {
                     <h2>{note.title}</h2>
                     <p>{note.content}</p>
                     <div className="links">
-                        <span><Link to="/editor">Go To Editor</Link></span>
+                        <span  onClick={()=>handleClick(note.id)}>
+                           Go To Editor</span>
                         <button>Delete this note</button>
                     </div>
                     <br/>
@@ -111,6 +117,11 @@ function NotesList() {
             </div>
         </div>)
     }
+    else
+    {
+        return <Editor noteList={notes} selectedNoteId={selectedNoteIndex} setShowEditor={setShowEditor}/>
+    }
+}
 }
 
 export default NotesList

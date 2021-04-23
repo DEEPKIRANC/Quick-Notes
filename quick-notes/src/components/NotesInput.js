@@ -6,7 +6,7 @@ import {db} from "../firebase";
 import firebase from "firebase";
 
 function NotesInput() {
-    const [user,setUser]=useContext(UserContext);
+    const [user,setUser,showInputSection,setShowInputSection]=useContext(UserContext);
     const [title,setTitle]=useState("");
     const [note,setNote]=useState("");
 
@@ -44,6 +44,8 @@ function NotesInput() {
         }    
     }
 }
+    if(showInputSection)
+    {
     return (
         <div className="inputsection">
             <div className="overview animate__animated animate__fadeIn">
@@ -67,6 +69,11 @@ function NotesInput() {
             </div>            
         </div>
     )
+    }
+    else
+    {
+        return <h1>Welcome To QuickNotes</h1>
+    } 
 }
 
 export default NotesInput

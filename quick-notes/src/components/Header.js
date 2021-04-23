@@ -15,7 +15,7 @@ function Header() {
             <h1>QuickNotes</h1>
             <div className="Navbar__links">
                 <Link to="/">Home</Link>
-                <a href="/">Starred</a>
+                <Link to="/">Starred</Link>
                 {user?<Link to="/login">Log Out</Link>:
                 <Link to="/login">Sign In</Link>
                 }
