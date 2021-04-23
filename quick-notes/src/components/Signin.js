@@ -2,10 +2,12 @@ import React,{useEffect,useContext,useState} from 'react'
 import {UserContext} from "../hooks/UserProvider";
 import {firebaseApp} from "../firebase";
 import "../styles/signin.css";
+//import {useHistory} from "react-router-dom";
 
 
 
 function Signin() {
+  //  const history=useHistory();
     const [user,setUser]=useContext(UserContext);
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
@@ -47,7 +49,8 @@ function Signin() {
                         break;
                     }
             })
-          alert("You are being logged in!"); 
+          alert("You are being logged in!");
+    //      history.push("/"); 
         }
     
 

@@ -140,7 +140,7 @@ const spanStyle={
                 {notes.map(note=>
                 <div key={note.id} className="notes__notecard special animate__animated animate__fadeIn">
                     <h2>{note.title}</h2>
-                    <p>{note.content && removeHTMLTags(note.content.substring(0,100)) + '...'}</p>
+                    <p>{note.content && removeHTMLTags(note.content.substring(0,50)) + '...'}</p>
                     <div className="links">
                         <span style={spanStyle} onClick={()=>handleClick(note.id)}>
                            Open Editor</span>

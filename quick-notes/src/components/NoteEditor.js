@@ -61,7 +61,7 @@ useEffect(()=>{
             <div className="notesection">
                 <div className="selectednote">
                     <h1>{title}</h1>
-                    <p>{removeHTMLTags(text)}</p>
+                    <p style={{wordWrap:"break-word"}}>{removeHTMLTags(text)}</p>
                     
                     <button className="back" onClick={handleClick}>Close Editor</button>
                 </div>
