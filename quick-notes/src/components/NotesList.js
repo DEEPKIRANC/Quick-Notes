@@ -2,16 +2,18 @@ import React,{useState,useEffect,useContext} from 'react'
 import "../styles/noteslist.css";
 import {db} from "../firebase";
 import {UserContext} from "../hooks/UserProvider";
-import Editor from "./NoteEditor";
 import {removeHTMLTags} from "../helpers";
+import NoteEditor from './NoteEditor';
+import firebase from "firebase";
 
 function NotesList() {
 
-    const [user,setUser,showInputSection,setShowInputSection]=useContext(UserContext);
+    const [user,setUser,,setShowInputSection]=useContext(UserContext);
     const [notes,setNotes]=useState([]);
 
     const [showEditor,setShowEditor]=useState(false);
     const [selectedNoteIndex,setSelectedNoteIndex]=useState("");
+    const [selectNote,setSelectedNote]=useState({});
 
     useEffect(()=>{
         var userObj=localStorage.getItem("user");
@@ -24,7 +26,7 @@ function NotesList() {
         {
             console.log("User Not set!");
         }
-    },[])
+    },[setUser])
 
     useEffect(()=>{
         
@@ -49,7 +51,13 @@ const handleClick=(id)=>{
     setSelectedNoteIndex(id);
     setShowEditor(true);
     setShowInputSection(false);
+    const noteObj=notes.filter(note=>note.id===id)[0];
+    setSelectedNote(noteObj);
 }
+
+
+
+
 
     if(!user || notes.length===0)
     {
@@ -97,10 +105,16 @@ const handleClick=(id)=>{
     }
     else
     {
-        if(!showEditor)
-        {
+        
         return ( <div>
-            <h2 style={{textAlign:"center",backgroundColor:"whitesmoke",fontFamily:"Libre Baskerville",paddingTop:"1rem"}}>Sample Notes</h2>
+             {showEditor && <NoteEditor 
+             noteObj={selectNote} 
+             notesList={notes} 
+             selectedNoteIndex={selectedNoteIndex} 
+             setShowEditor={setShowEditor} 
+             />}
+             <br />   
+            <h2 style={{textAlign:"center",backgroundColor:"whitesmoke",fontFamily:"Libre Baskerville",paddingTop:"1rem",textDecoration:"underline"}}>My Notes</h2>
             <div className="notes">
                 {notes.map(note=>
                 <div key={note.id} className="notes__notecard">
@@ -116,13 +130,10 @@ const handleClick=(id)=>{
                 </div>
                 )}    
             </div>
-        </div>)
+            </div>)
     }
-    else
-    {
-        return <Editor noteList={notes} selectedNoteId={selectedNoteIndex} setShowEditor={setShowEditor}/>
-    }
+    
 }
-}
+
 
 export default NotesList

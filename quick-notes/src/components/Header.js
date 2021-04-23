@@ -3,10 +3,9 @@ import "../styles/header.css";
 import "animate.css";
 import {Link} from "react-router-dom";
 import {UserContext} from "../hooks/UserProvider";
-import {firebaseApp} from "../firebase";
 
 function Header() {
-    const [user,setUser]=useContext(UserContext);
+    const [user,]=useContext(UserContext);
  
  
 

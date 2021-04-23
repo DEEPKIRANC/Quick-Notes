@@ -6,7 +6,7 @@ import {db} from "../firebase";
 import firebase from "firebase";
 
 function NotesInput() {
-    const [user,setUser,showInputSection,setShowInputSection]=useContext(UserContext);
+    const [user,,showInputSection,]=useContext(UserContext);
     const [title,setTitle]=useState("");
     const [note,setNote]=useState("");
 
@@ -72,7 +72,7 @@ function NotesInput() {
     }
     else
     {
-        return <h1>Welcome To QuickNotes</h1>
+        return <div><br/><h2>Welcome To QuickNotes</h2></div>
     } 
 }
 
