@@ -2,12 +2,12 @@ import React,{useEffect,useContext,useState} from 'react'
 import {UserContext} from "../hooks/UserProvider";
 import {firebaseApp} from "../firebase";
 import "../styles/signin.css";
-//import {useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 
 function Signin() {
-  //  const history=useHistory();
+    //const history=useHistory();
     const [user,setUser]=useContext(UserContext);
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
@@ -119,10 +119,10 @@ function Signin() {
         <div className="btnContainer">
             {hasAccount?
             <>
-            <button className="logBtn" onClick={handleLogin}>Sign In</button>
+            <Link to="/"><button className="logBtn" onClick={handleLogin}>Sign In</button></Link>
             <p>Don't have an account ? <span onClick={()=>setHasAccount(!hasAccount)}>Sign Up</span></p>
             </>:<>
-            <button className="logBtn" onClick={handleSignup}>Sign Up</button>
+            <Link to="/"><button className="logBtn" onClick={handleSignup}>Sign Up</button></Link>
             <p>Have an account ? <span onClick={()=>setHasAccount(!hasAccount)}>Sign In</span></p>
             
             </>
@@ -141,7 +141,7 @@ function Signin() {
     {
         return <div className="logout">
         <div className="logout__container">
-            <h3 style={{color:"white",textAlign:"center"}}>You are now logged in ! Click on Home to start using QuickNotes :) </h3>
+            <h3 style={{color:"white",textAlign:"center"}}>You are now logged in ! </h3>
             <button className="logBtn" onClick={handleLogOut}>Log Out</button>
         </div>
         </div>
