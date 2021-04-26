@@ -189,7 +189,7 @@ const head ={
                     <div className="links">
                         <span style={spanStyle} onClick={()=>handleClick(note.id)}>
                            Open Editor</span>
-                        <button disabled={note.isBookmarked} {disabled ? {opacity:"0.2"}:null} onClick={()=>deleteNote(note.id)}>Delete this note</button>
+                        <button disabled={note.isBookmarked} style={note.isBookmarked ? {opacity:"0.2"}:null} onClick={()=>deleteNote(note.id)}>Delete this note</button>
                     </div>
                     <br/>
                     <span><strong>Last Updated at</strong>: {note.updatedAt && note.updatedAt.toDate().toString()} </span>
