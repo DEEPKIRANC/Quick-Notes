@@ -4,6 +4,8 @@ import {db} from "../firebase";
 import {UserContext} from "../hooks/UserProvider";
 import {removeHTMLTags} from "../helpers";
 import NoteEditor from './NoteEditor';
+import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
+import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import "animate.css";
 
 function NotesList() {
@@ -72,10 +74,29 @@ const deleteNote=(id)=>{
 
 }
 
+
+const handleBookmarks=(id,note)=>{
+const btn=document.getElementById(id);
+!btn.disabled ? btn.style.opacity=0.2 : btn.style.opacity=1;
+    db.collection("notes").doc(id).update({
+    isBookmarked:!note.isBookmarked
+    })
+
+
+ 
+
+}
+
 const spanStyle={
     color:"white",
     cursor:"pointer",
     fontSize:"0.90rem"
+}
+
+const head ={
+    display:"flex",
+    width:"100%",
+    justifyContent:"space-between"
 }
 
 
@@ -87,18 +108,25 @@ const spanStyle={
             <h2 style={{textAlign:"center",backgroundColor:"whitesmoke",fontFamily:"Libre Baskerville",paddingTop:"1rem"}}>Sample Notes</h2>
             <div className="notes">
                 <div className="notes__notecard">
-                    <h2>Title 1</h2>
+                    <div style={head}>
+                        <h2>Title 1</h2>
+                        <TurnedInNotIcon />
+                    </div>    
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div className="links">
                         <span style={spanStyle}>Open Editor</span>
+                       
                         <button>Delete this note</button>
                     </div>
                     <br/>
                     <span>Last Updated at Time : <strong>Sign In to Explore!</strong> </span>
                 </div>
                 <div className="notes__notecard">
-                    <h2>Sign In to Get Started</h2>
+                    <div style={head}>
+                        <h2>Sign In to get started</h2>
+                        <TurnedInNotIcon />
+                    </div>    
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div className="links">
@@ -109,7 +137,10 @@ const spanStyle={
                     <span>Last Updated at Time : <strong>Sign In to Explore!</strong></span>
                 </div>    
                 <div className="notes__notecard">
-                    <h2>Title 3</h2>
+                    <div style={head}>
+                        <h2>Title 3</h2>
+                        <TurnedInNotIcon style={{color:"black"}} />
+                    </div>    
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div className="links">
@@ -139,12 +170,26 @@ const spanStyle={
             <div className="notes">
                 {notes.map(note=>
                 <div key={note.id} className="notes__notecard special animate__animated animate__fadeIn">
-                    <h2>{note.title}</h2>
+                    <div style={head}>
+                        <h2>{note.title}</h2>
+                        {note.isBookmarked?
+                        <span style={{cursor:"pointer"}} onClick={()=>handleBookmarks(note.id,note)}>
+                            <TurnedInIcon/>
+                        </span>
+                       
+                        :
+                            
+                        <span style={{cursor:"pointer"}} onClick={()=>handleBookmarks(note.id,note)}>
+                            
+                            <TurnedInNotIcon />
+                        </span>
+                        }
+                    </div>    
                     <p>{note.content && removeHTMLTags(note.content.substring(0,50)) + '...'}</p>
                     <div className="links">
                         <span style={spanStyle} onClick={()=>handleClick(note.id)}>
                            Open Editor</span>
-                        <button onClick={()=>deleteNote(note.id)}>Delete this note</button>
+                        <button disabled={note.isBookmarked} id={note.id} onClick={()=>deleteNote(note.id)}>Delete this note</button>
                     </div>
                     <br/>
                     <span><strong>Last Updated at</strong>: {note.updatedAt && note.updatedAt.toDate().toString()} </span>
