@@ -12,7 +12,7 @@ function NotesList() {
 
     const [user,setUser,,setShowInputSection]=useContext(UserContext);
     const [notes,setNotes]=useState([]);
-
+    const [bColor,setBColor]=useState("#fefae0");
     const [showEditor,setShowEditor]=useState(false);
     const [selectedNoteIndex,setSelectedNoteIndex]=useState("");
     const [selectNote,setSelectedNote]=useState({});
@@ -76,7 +76,6 @@ const deleteNote=(id)=>{
 
 
 const handleBookmarks=(id,note)=>{
-const btn=document.getElementById(id);
 
     db.collection("notes").doc(id).update({
     isBookmarked:!note.isBookmarked
@@ -87,6 +86,8 @@ const btn=document.getElementById(id);
 
 }
 
+ 
+
 const spanStyle={
     color:"white",
     cursor:"pointer",
@@ -96,7 +97,8 @@ const spanStyle={
 const head ={
     display:"flex",
     width:"100%",
-    justifyContent:"space-between"
+    justifyContent:"space-between",
+    alignItems:"center"
 }
 
 
@@ -169,9 +171,18 @@ const head ={
             <h2 style={{textAlign:"center",backgroundColor:"whitesmoke",fontFamily:"Libre Baskerville",paddingTop:"1rem",textDecoration:"underline"}}>My Notes</h2>
             <div className="notes">
                 {notes.map(note=>
-                <div key={note.id} className="notes__notecard special animate__animated animate__fadeIn">
+                
+                <div key={note.id} style={{backgroundColor:bColor}} className="notes__notecard special animate__animated animate__fadeIn">
                     <div style={head}>
                         <h2>{note.title}</h2>
+                        <input type="color" value={bColor} onChange={(e)=>setBColor(e.target.value)} list="presetColors" />
+                        <datalist id="presetColors">
+                            <option value="#fefae0">#fefae0</option>
+                            <option value="#ede9fe">#EDE9FE</option>
+                            <option value="#fee2e2">#FEE2E2</option>
+                            <option value="#d1fae5">#D1FAE5</option>
+                            
+                        </datalist>
                         {note.isBookmarked?
                         <span style={{cursor:"pointer"}} onClick={()=>handleBookmarks(note.id,note)}>
                             <TurnedInIcon/>
