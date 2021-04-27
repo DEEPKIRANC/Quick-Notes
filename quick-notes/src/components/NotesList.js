@@ -77,9 +77,22 @@ const deleteNote=(id)=>{
 
 const handleBookmarks=(id,note)=>{
 
+    if(!note.isBookmarked)
+    {
+      const elem=document.getElementById(id);
+      setTimeout(()=>{
+        elem.classList.add("show");  
+      },0);
+      setTimeout(()=>{
+        elem.classList.remove("show");
+      },1000);
+    }
+
+
     db.collection("notes").doc(id).update({
     isBookmarked:!note.isBookmarked
     })
+
 
 
  
@@ -101,6 +114,9 @@ const head ={
     alignItems:"center"
 }
 
+const handleBookmarkclick=()=>{
+    
+    }
 
 
     if(!user || notes.length===0)
@@ -112,8 +128,9 @@ const head ={
                 <div className="notes__notecard">
                     <div style={head}>
                         <h2>Title 1</h2>
-                        <TurnedInNotIcon />
+                        <TurnedInNotIcon onClick={handleBookmarkclick} />
                     </div>    
+                    
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div className="links">
@@ -195,6 +212,7 @@ const head ={
                             <TurnedInNotIcon />
                         </span>
                         }
+                        <span id={note.id}  className="alert animate__animated animate__fadeIn">Note Bookmarked!</span>
                     </div>    
                     <p>{note.content && removeHTMLTags(note.content.substring(0,50)) + '...'}</p>
                     <div className="links">

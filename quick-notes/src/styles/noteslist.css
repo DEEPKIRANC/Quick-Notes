@@ -27,6 +27,7 @@ body
     border-radius: 20px;
     max-width:20rem;
     padding:1rem;
+    position:relative;
 }
 .notes__notecard p
 {
@@ -72,4 +73,27 @@ body
 .special
 {
     animation-duration: 2s;
+}
+
+.alert
+{
+  display:none;
+  position:absolute;
+  top:-2rem;
+  right:25%;
+  padding:0.5rem;
+  background-color:#5cb85c;
+  color:white;
+  font-weight:bold;
+  border-radius:10px;
+  font-family:"segoe ui";
+  font-size: 0.8rem;
+  
+
+ 
+}
+
+.show
+{
+  display:block;
 }
