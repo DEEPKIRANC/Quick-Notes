@@ -85,7 +85,7 @@ const handleBookmarks=(id,note)=>{
       },0);
       setTimeout(()=>{
         elem.classList.remove("show");
-      },1000);
+      },1300);
     }
 
 
@@ -114,9 +114,7 @@ const head ={
     alignItems:"center"
 }
 
-const handleBookmarkclick=()=>{
-    
-    }
+
 
 
     if(!user || notes.length===0)
@@ -128,7 +126,7 @@ const handleBookmarkclick=()=>{
                 <div className="notes__notecard">
                     <div style={head}>
                         <h2>Title 1</h2>
-                        <TurnedInNotIcon onClick={handleBookmarkclick} />
+                        <TurnedInNotIcon/>
                     </div>    
                     
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
