@@ -7,6 +7,7 @@ import {UserContext} from "../hooks/UserProvider";
 import {removeHTMLTags} from "../helpers";
 import {db} from "../firebase";
 import firebase from "firebase";
+import parse from "html-react-parser";
 
 
 function NoteEditor({noteObj,notesList,selectedNoteId,setShowEditor,noteUpdate}) {
@@ -61,7 +62,7 @@ useEffect(()=>{
             <div className="notesection">
                 <div className="selectednote">
                     <h1>{title}</h1>
-                    <p style={{wordWrap:"break-word"}}>{removeHTMLTags(text)}</p>
+                    <p style={{wordWrap:"break-word"}}>{parse(text)}</p>
                     
                     <button className="back" onClick={handleClick}>Close Editor</button>
                 </div>

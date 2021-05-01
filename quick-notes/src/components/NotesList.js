@@ -7,6 +7,7 @@ import NoteEditor from './NoteEditor';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import "animate.css";
+import parse from "html-react-parser";
 
 function NotesList() {
 
@@ -212,7 +213,7 @@ const head ={
                         }
                         <span id={note.id}  className="alert animate__animated animate__fadeIn">Note Bookmarked!</span>
                     </div>    
-                    <p>{note.content && removeHTMLTags(note.content.substring(0,50)) + '...'}</p>
+                    <p>{note.content && removeHTMLTags(note.content.substring(0,50))+"..."}</p>
                     <div className="links">
                         <span style={spanStyle} onClick={()=>handleClick(note.id)}>
                            Open Editor</span>
