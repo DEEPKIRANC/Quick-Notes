@@ -15,6 +15,7 @@
     align-items: flex-start;
     height:auto;
     word-wrap: break-word;
+    margin-top:30px;
 }
 .selectednote > *:not(:last-child)
 {

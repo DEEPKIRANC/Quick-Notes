@@ -4,7 +4,6 @@ import "react-quill/dist/quill.snow.css";
 import "../styles/noteeditor.css";
 import {useDebounce} from "../helpers";
 import {UserContext} from "../hooks/UserProvider";
-import {removeHTMLTags} from "../helpers";
 import {db} from "../firebase";
 import firebase from "firebase";
 import parse from "html-react-parser";

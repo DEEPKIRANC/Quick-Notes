@@ -17,6 +17,15 @@ body
     padding:1rem;
 }
 
+.notes__header
+{
+    background-color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+}
 .notes__notecard
 {
     margin-top: 1rem;
