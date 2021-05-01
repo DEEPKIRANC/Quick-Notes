@@ -7,7 +7,7 @@ import Signin from './components/Signin';
 function App() {
   return (
   <Router>
-    <div className="App">
+    <div>
       <Header />
       <Switch>
         <Route path="/" exact>
