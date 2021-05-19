@@ -4,23 +4,28 @@ import "animate.css";
 import {UserContext} from "../hooks/UserProvider"
 import {db} from "../firebase";
 import firebase from "firebase";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function NotesInput() {
     const [user,,showInputSection,]=useContext(UserContext);
     const [title,setTitle]=useState("");
     const [note,setNote]=useState("");
 
+
+    // function to add notes
     const handleClick=(e)=>{
         e.preventDefault();
         if(!user)
         {
-            alert("Please SignIn to add your notes!")
+            toast.warning("Please SignIn to add your notes!",{position:"top-right"})
+            
         }
         else
         {
             if(title.trim().length<1 || note.trim().length<1)
             {
-                alert("This app doesn't accept blank values!");
+                toast.warning("This app doesn't accept blank values!",{position:"top-right"})
             }
             else
             {
@@ -35,10 +40,10 @@ function NotesInput() {
             .then(()=>{
                 setNote('');
                 setTitle('');
-                alert("New Note Added!");
+                toast.success("New Note Added!",{position:"top-right"});
             })
             .catch((error)=>{
-                alert(error.message);
+                toast.error(error.message,{position:"top-right"});
             })
             
         }    
@@ -46,7 +51,9 @@ function NotesInput() {
 }
     if(showInputSection)
     {
+    // showing home page with add note view    
     return (
+        <>
         <div className="inputsection">
             <div className="overview animate__animated animate__fadeIn">
                 <h3>Welcome To QuickNotes</h3>
@@ -68,10 +75,13 @@ function NotesInput() {
                 </form>        
             </div>            
         </div>
+        <ToastContainer/>
+        </>
     )
     }
     else
     {
+        // showing react quill editor and hiding *add note* view
         return <div><br/><h2>Welcome To QuickNotes</h2></div>
     } 
 }

@@ -7,6 +7,8 @@ import NoteEditor from './NoteEditor';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import "animate.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function NotesList() {
@@ -17,6 +19,8 @@ function NotesList() {
     const [showEditor,setShowEditor]=useState(false);
     const [selectedNoteIndex,setSelectedNoteIndex]=useState("");
     const [selectNote,setSelectedNote]=useState({});
+
+// Fetch user details in first render    
 
     useEffect(()=>{
         var userObj=localStorage.getItem("user");
@@ -31,6 +35,7 @@ function NotesList() {
         }
     },[setUser])
 
+// Update local storage and notes array when user is changed    
     useEffect(()=>{
         
         if(user)
@@ -49,6 +54,7 @@ function NotesList() {
     }
 },[user])
 
+// handle note click event
 
 const handleClick=(id)=>{
     setSelectedNoteIndex(id);
@@ -56,28 +62,34 @@ const handleClick=(id)=>{
     setShowInputSection(false);
     const noteObj=notes.filter(note=>note.id===id)[0];
     setSelectedNote(noteObj);
+   
+    // scroll to top
     window.scroll({
         top:0,
         behavior:'smooth'
     });
 }
 
-
+// handle delete note event
 const deleteNote=(id)=>{
     var confirm=window.confirm("Do you want to delete this note ..?")
     if(confirm)
     {
         setShowEditor(false);
         setShowInputSection(true);
-        db.collection("notes").doc(id).delete();
+        db.collection("notes").doc(id).delete().then(()=>{
+                toast.success("Note Deleted!",{position:"top-right"});
+        });
         
 }
 
 }
 
+// bookmarking feature
 
 const handleBookmarks=(id,note)=>{
 
+    // custom alert show/hide functionality
     if(!note.isBookmarked)
     {
       const elem=document.getElementById(id);
@@ -93,11 +105,6 @@ const handleBookmarks=(id,note)=>{
     db.collection("notes").doc(id).update({
     isBookmarked:!note.isBookmarked
     })
-
-
-
- 
-
 }
 
  
@@ -176,7 +183,9 @@ const head ={
     else
     {
         
-        return ( <div>
+        return (
+            <>
+            <div>
              {showEditor && <NoteEditor 
              noteObj={selectNote} 
              notesList={notes} 
@@ -229,7 +238,10 @@ const head ={
                 )}    
             </div>
             </div>
-            </div>)
+            </div>
+            <ToastContainer/>
+            </>
+            )
     }
     
 }

@@ -1,4 +1,5 @@
 import React,{useEffect,useContext,useState} from 'react'
+
 import {UserContext} from "../hooks/UserProvider";
 import {firebaseApp} from "../firebase";
 import "../styles/signin.css";
@@ -35,6 +36,7 @@ function Signin() {
          firebaseApp
          .auth()
          .signInWithEmailAndPassword(email,password)
+      
          .catch(err=>
             {
                 switch(err.code)
@@ -49,8 +51,8 @@ function Signin() {
                         break;
                     }
             })
-          alert("You are being logged in!");
-    //      history.push("/"); 
+            
+    //       
         }
     
 
@@ -74,14 +76,15 @@ function Signin() {
                        break;
                    }
            })
-         
+              
    }
 
 
    const handleLogOut=()=>{
+     
      firebaseApp.auth().signOut();
      localStorage.removeItem("user");   
-     alert("You have been logged out!");
+     
    }
 
    const authListener=()=>{
@@ -107,44 +110,50 @@ function Signin() {
     
     if(!user){
     return (
-
+       
          <section className="login">
-    <div className="loginContainer animate__animated animate__fadeIn">
-        <label>Username</label>
-        <input type="text" autofocus required value={email} onChange={e=>setEmail(e.target.value)} />
-        <p className="errorMsg">{emailError}</p>
-        <label>Password</label>
-        <input type="password"  required value={password} onChange={e=>setPassword(e.target.value)} />
-        <p className="errorMsg">{passwordError}</p>
-        <div className="btnContainer">
-            {hasAccount?
-            <>
-            <Link to="/"><button className="logBtn" onClick={handleLogin}>Sign In</button></Link>
-            <p>Don't have an account ? <span onClick={()=>setHasAccount(!hasAccount)}>Sign Up</span></p>
-            </>:<>
-            <Link to="/"><button className="logBtn" onClick={handleSignup}>Sign Up</button></Link>
-            <p>Have an account ? <span onClick={()=>setHasAccount(!hasAccount)}>Sign In</span></p>
-            
-            </>
+            <div className="loginContainer animate__animated animate__fadeIn">
+                <label>Username</label>
+                <input type="text" autofocus required value={email} onChange={e=>setEmail(e.target.value)} />
+                <p className="errorMsg">{emailError}</p>
+                <label>Password</label>
+                <input type="password"  required value={password} onChange={e=>setPassword(e.target.value)} />
+                <p className="errorMsg">{passwordError}</p>
+                <div className="btnContainer">
+                    {hasAccount?
+                    <>
+                    <button className="logBtn" onClick={handleLogin}>Sign In</button>
+                    <p>Don't have an account ? <span onClick={()=>setHasAccount(!hasAccount)}>Sign Up</span></p>
+                    </>:<>
+                    <button className="logBtn" onClick={handleSignup}>Sign Up</button>
+                    <p>Have an account ? <span onClick={()=>setHasAccount(!hasAccount)}>Sign In</span></p>
+                    
+                    </>
+                
+                }
+                </div>
+                <span style={{fontSize:"0.75rem",color:"whitesmoke",fontWeight:"normal"}}>
+                ( Demo Credentials -  User : demo@gmail.com | Password: 123456 )
+                </span>    
+            </div>
+          </section>
         
-        }
-        </div>
-        <span style={{fontSize:"0.75rem",color:"whitesmoke",fontWeight:"normal"}}>
-           ( Demo Credentials -  User : demo@gmail.com | Password: 123456 )
-        </span>    
-    </div>
-    </section>
 
 )
     }
     else
     {
+
         return <div className="logout">
         <div className="logout__container">
-            <h3 style={{color:"white",textAlign:"center"}}>You are now logged in ! </h3>
-            <button className="logBtn" onClick={handleLogOut}>Log Out</button>
+            <h3 style={{color:"white",textAlign:"center",fontFamily: 'Libre Baskerville'}}>You are now logged in ! </h3>
+            <div style={{display:"flex"}}>
+                <Link style={{ marginRight:"1rem" }} to="/"><button className="logBtn">Go To Home</button></Link>
+                <button className="logBtn" onClick={handleLogOut}>Log Out</button>
+            </div>
         </div>
         </div>
+       
     }
 }
 

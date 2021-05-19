@@ -14,8 +14,8 @@ function App() {
           <NotesInput />
           <NotesList />
         </Route>
-        <Route path="/login">
-          <Signin />
+        <Route path="/login" component={Signin}>
+          
         </Route>
       </Switch>
     </div>

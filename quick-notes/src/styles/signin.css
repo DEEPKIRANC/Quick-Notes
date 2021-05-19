@@ -112,4 +112,7 @@
   .logout__container button
   {
     margin-top:1rem;
+    padding:0.5rem 2rem;
+    margin-left: 1rem;
+    font-family: 'Libre Baskerville';
   }
