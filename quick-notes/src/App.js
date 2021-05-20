@@ -4,6 +4,7 @@ import NotesInput from './components/NotesInput';
 import NotesList from './components/NotesList';
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import Signin from './components/Signin';
+import ErrorPage from "./components/ErrorPage";
 function App() {
   return (
   <Router>
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" component={Signin}>
           
         </Route>
+        <Route component={ErrorPage}></Route>
       </Switch>
     </div>
   </Router>
