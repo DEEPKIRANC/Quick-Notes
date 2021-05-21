@@ -1,5 +1,5 @@
 import React,{useEffect,useContext,useState} from 'react'
-
+import {useHistory} from "react-router-dom";
 import {UserContext} from "../hooks/UserProvider";
 import {firebaseApp} from "../firebase";
 import "../styles/signin.css";
@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 
 
 function Signin() {
-    //const history=useHistory();
+    let history=useHistory();
     const [user,setUser]=useContext(UserContext);
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
@@ -36,7 +36,9 @@ function Signin() {
          firebaseApp
          .auth()
          .signInWithEmailAndPassword(email,password)
-      
+         .then(()=>{
+            history.push("/");
+         })
          .catch(err=>
             {
                 switch(err.code)
@@ -45,14 +47,16 @@ function Signin() {
                     case "auth/user-disabled":
                     case "auth/user-not-found":
                         setEmailError(err.message);
+                        clearInputs();
                         break;
                     case "auth/wrong-password":
-                        setPasswordError(err.message);           
+                        setPasswordError(err.message);
+                        clearInputs();           
                         break;
                     }
             })
             
-    //       
+           
         }
     
 
@@ -62,6 +66,9 @@ function Signin() {
         firebaseApp
         .auth()
         .createUserWithEmailAndPassword(email,password)
+        .then(()=>{
+            history.push("/");
+         })
         .catch(err=>
            {
                switch(err.code)
@@ -70,9 +77,11 @@ function Signin() {
                    case "auth/invalid-email":
                    
                        setEmailError(err.message);
+                       clearInputs();
                        break;
                    case "auth/weak-password":
-                       setPasswordError(err.message);           
+                       setPasswordError(err.message);
+                       clearInputs();           
                        break;
                    }
            })
